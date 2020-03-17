@@ -72,6 +72,14 @@ export default function isMobile(userAgent?: string): isMobileResult {
     userAgent = tmp[0];
   }
 
+  let isIOS =
+    /iPad|iPhone|iPod/.test(navigator.platform) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  if (isIOS) {
+    userAgent = 'iPad';
+  }
+
   const match = createMatch(userAgent);
 
   const result: isMobileResult = {
